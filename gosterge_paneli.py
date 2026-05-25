@@ -1,74 +1,53 @@
 import streamlit as st
 import streamlit.components.v1 as components
-import pandas as pd
-import numpy as np
-import time
 
-# 1. Sayfa Ayarları
-st.set_page_config(page_title="Lezzet Analitik Portalı", layout="wide", page_icon="📈")
+st.set_page_config(page_title="Lezzet Analitik Portalı", layout="wide")
 
-# 2. CSS Tasarımı
+# CSS: Dashboard'a profesyonel, "Dark-Mode" kurumsal görünüm kazandırıyoruz
 st.markdown("""
     <style>
-    [data-testid="stAppViewContainer"] { overflow: hidden !important; }
-    .main { background-color: #0c0e11 !important; color: #e0e0e0 !important; }
-    h1, h2, h3 { color: #00ffcc !important; font-weight: 300 !important; }
-    .metric-card { 
-        background-color: #161b22; padding: 20px; border-radius: 10px; 
-        border: 1px solid #30363d; margin-bottom: 15px;
-    }
-    .stDataFrame { border: 1px solid #30363d !important; }
+    .stApp { background-color: #0c0e11; }
+    h1 { color: #00ffcc !important; text-align: center; }
+    .stInfo, .stWarning { background-color: #161b22 !important; border-left: 5px solid #30363d !important; }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-st.title("👨‍🍳 Lezzet Analitik Portalı")
-st.markdown("---")
+st.title("👨‍🍳 Sosyal Ağ ve Lezzet Analitik Portalı")
 
-if 'data' not in st.session_state:
-    st.session_state.data = pd.DataFrame({'Uyum': [95.0]})
+col_g, col_a = st.columns([2, 1])
 
-col_grafik, col_panel = st.columns([2.5, 1])
-
-# Grafik Alanı
-with col_grafik:
-    st.subheader("Anlık Malzeme Ağı Etkileşim Haritası")
+with col_g:
+    st.subheader("İnteraktif Ağ Görselleştirme")
+    # Filtreleme menüleri grafiğin üstüne eklendiği için yüksekliği 700px yaptık
     try:
         with open("lezzet_agi_grafigi.html", 'r', encoding='utf-8') as f:
-            components.html(f.read(), height=550)
-    except:
-        st.error("Grafik dosyası oluşturulmamış! 'ag_gorsellestirme.py' çalıştırın.")
+            components.html(f.read(), height=700, scrolling=True)
+    except FileNotFoundError:
+        st.error("HTML dosyası bulunamadı! 'python ag_gorsellestirme.py' çalıştırın.")
 
-# Panel Alanı (Yer tutucular ile titreşimi sıfırladık)
-with col_panel:
-    st.subheader("Canlı Performans")
+with col_a:
+    st.subheader("📊 Network Intelligence")
     
-    # Yer tutucular (Placeholders)
-    metrik_ph = st.empty()
-    grafik_ph = st.empty()
-    tablo_ph = st.empty()
+    # 1. Community Narrative (Akademik Dil ile Geliştirildi)
+    with st.expander("🔍 Topluluk Analizi (Community Detection)", expanded=True):
+        st.markdown("""
+        **Louvain Modularity** algoritması ile ağ iki ana kümeye (partition) ayrılmıştır[cite: 52]:
+        * **Cluster A (Tatlılar Grubu):** Merkezcil düğümler (Çikolata, Şeker, Vanilya). Yüksek bağlantı yoğunluğuna sahip, ağın "hub" yapısını oluşturan ana kümedir[cite: 53].
+        * **Cluster B (Sebze Grubu):** Daha dışsal bir yapıda konumlanan, spesifik lezzet fonksiyonlarına sahip küme (Soğan, Sarımsak)[cite: 53].
+        """)
+    
+    # 2. Köprü Analizi (Teknik Derinlik)
+    with st.expander("🌉 Köprü (Bridge) Analizi", expanded=True):
+        st.markdown("""
+        **Betweenness Centrality** metriği ile ağın geçit bekçileri tanımlanmıştır[cite: 57]:
+        * **Kritik Düğüm:** *Tereyağı*.
+        * **Stratejik Önemi:** İki farklı küme (Tatlı ve Sebze) arasındaki tek doğrudan bilgi/lezzet transfer noktasıdır[cite: 68].
+        * **Risk Analizi:** Ağdan kaldırılması durumunda *graph fragmentation* (ağ parçalanması) yaşanacak ve iki küme arasındaki iletişim tamamen izole olacaktır[cite: 69].
+        """)
 
-    # Veri güncelleme mantığı
-    new_val = st.session_state.data.iloc[-1, 0] + np.random.randn() * 0.5
-    st.session_state.data = pd.concat([st.session_state.data, pd.DataFrame({'Uyum': [new_val]})], ignore_index=True).tail(20)
-    
-    # Yer tutucuları doldur
-    with metrik_ph.container():
-        st.markdown(f"""
-            <div class="metric-card">
-                <div style="color: #8b949e; font-size: 0.8rem; text-transform: uppercase;">Güncel Uyum Skoru</div>
-                <div style="color: #ffffff; font-size: 1.8rem; font-weight: 700; margin-top:5px;">%{new_val:.2f}</div>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with grafik_ph.container():
-        st.line_chart(st.session_state.data, height=150)
-    
-    with tablo_ph.container():
-        st.dataframe(pd.DataFrame({
-            'Malzeme': ['Süt', 'Şeker', 'Soğan'],
-            'Durum': ['Optimal', 'Düşük', 'Yüksek']
-        }), use_container_width=True, hide_index=True)
-
-# Stabil döngü
-time.sleep(1)
-st.rerun()
+    # 3. Visualization Critique (Hocanın rapor için istediği eleştiri kısmı)
+    with st.expander("🛠 Görselleştirme Tasarım Notları"):
+        st.markdown("""
+        * **Layout Justification:** `Force-Directed (Barnes-Hut)` algoritması, küme ayrışmasını ve köprü düğümlerin (bridge nodes) belirginleşmesini sağlamıştır[cite: 63].
+        * **Visual Hierarchy:** Düğüm boyutları `Betweenness Centrality` ile ölçeklenerek, ağdaki "Key Actors" (kilit oyuncular) görsel olarak ön plana çıkarılmıştır[cite: 55, 61].
+        """)
