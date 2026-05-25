@@ -1,6 +1,6 @@
 # Food Ingredient Network Analysis Using Graph Theory and Community Detection
 
-## 📌 Proje Genel Bakış
+##  Proje Genel Bakış
 
 Bu proje, ağ bilimi (network science) ve graph teorisi kullanılarak yemek malzemeleri arasındaki ilişkilerin analiz edilmesini amaçlamaktadır. Veri seti, malzemelerin düğüm (node) olarak temsil edildiği ve aynı tarif içerisinde birlikte kullanılmalarının bağlantı (edge) oluşturduğu bir ağ yapısına dönüştürülmüştür.
 
@@ -12,7 +12,7 @@ Bu çalışma; veri ön işleme, ağ oluşturma, merkeziyet analizi ve görselle
 
 ---
 
-## 🎯 Proje Amaçları
+## Proje Amaçları
 
 - Yemek malzemeleri arasındaki ilişkileri graph yapısına dönüştürmek
 - Community detection algoritmaları ile malzeme kümelerini belirlemek
@@ -22,7 +22,7 @@ Bu çalışma; veri ön işleme, ağ oluşturma, merkeziyet analizi ve görselle
 
 ---
 
-## 🧰 Kullanılan Teknolojiler
+## Kullanılan Teknolojiler
 
 - Python
 - NetworkX
@@ -33,13 +33,13 @@ Bu çalışma; veri ön işleme, ağ oluşturma, merkeziyet analizi ve görselle
 
 ---
 
-## 📊 Veri Seti
+##  Veri Seti
 
 Bu projede Flavor Network veri seti kullanılmıştır. Veri seti yemek malzemeleri arasındaki birlikte kullanılma ilişkilerini içermektedir.
 
 ---
 
-## 🧠 Yapılan Analizler
+##  Yapılan Analizler
 
 - Edge List oluşturma
 - Node ağı oluşturma
@@ -51,7 +51,7 @@ Bu projede Flavor Network veri seti kullanılmıştır. Veri seti yemek malzemel
 
 ---
 
-## 📈 Görselleştirme
+##  Görselleştirme
 
 Projede:
 - Community bazlı renklendirme
@@ -63,7 +63,7 @@ kullanılmıştır.
 
 ---
 
-## 📄 Rapor
+##  Rapor
 
 Teknik rapor proje klasörü içerisinde PDF formatında bulunmaktadır.
 
